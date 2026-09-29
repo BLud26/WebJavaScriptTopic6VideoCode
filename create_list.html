@@ -1,10 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
-$END$
+
+    <p>Enter some text to add to the list</p>
+    <input id="new-text"></input>
+    <button id="add-text">Add</button>
+    <button id="clear">Clear</button>
+    <!-- Empty unordered list -->
+    <ul id="list-of-text"></ul>
+
+<script>
+
+    //script here
+    let textInput = document.querySelector('#new-text')
+    let addButton = document.querySelector('#add-text')
+    let textList = document.querySelector('#list-of-text')
+    let clearButton = document.querySelector('#clear')
+
+    let elementsInList = 0
+    let maxElements = 10
+
+    // Listen for any key being pressed
+    document.addEventListener('keyup', function() {
+        if (event.keyCode == 13) { // if the up arrow is pressed, act as if the add button was clicked
+            addButton.click()
+        }
+    })
+
+    addButton.addEventListener('click', function () {
+
+        // Capture what was typed in the text box
+        let newText = textInput.value
+        // If text box was entered empty, alert the user
+        if (newText.length == 0) {
+            alert('Enter some text')
+            return;
+        }
+        // If the list is full, tell the user
+        if (elementsInList >= maxElements) {
+            alert('no more elements can be added')
+            return
+        }
+
+        // Create new <li> element
+        let newListItem = document.createElement('li')
+
+        // put user's text inside new li
+        newListItem.innerHTML = newText
+
+        // Add new li item to the end of the unordered list
+        textList.appendChild(newListItem)
+
+        // Clear the text box
+        textInput.value = ''
+
+        // Add 1 to the count the list items
+        elementsInList ++
+
+    })
+
+    // clear the list when the clear button is pressed
+    clearButton.addEventListener('click', function () {
+        textList.innerHTML = ''
+        elementsInList = 0
+    })
+
+</script>
+
 </body>
 </html>
