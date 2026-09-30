@@ -76,7 +76,7 @@
 
     // Set the total student count initially to 0
     let studentTotal = 0
-    studentCount.innderHTML = studentTotal
+    studentCount.innerHTML = studentTotal
 
     // Add a listener for click
     addButton.addEventListener('click', function () {
@@ -85,6 +85,7 @@
         let studentName = nameInput.value
         let studentId = id.value
         let studentGpa = gpa.value
+        let newListItem = document.createElement('li')
 
         // Validate the name
         if (studentName.length == 0) {
@@ -101,6 +102,20 @@
             alert('Enter a GPA that is between 0 and 4')
             return
         }
+        // Put the student's info in the li
+        newListItem.innerHTML = studentName + ', id: ' + studentId + ', GPA ' + studentGpa
+
+        // Add to the list
+        studentList.appendChild(newListItem)
+
+        // Clear the inputs
+        nameInput.value = ''
+        id.value = ''
+        gpa.value = ''
+
+        // Update the total
+        studentTotal ++
+        studentCount.innerHTML = studentTotal
     })
 
 
